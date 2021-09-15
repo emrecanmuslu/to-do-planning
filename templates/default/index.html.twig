@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}ToDo Planning{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        <h3>Completed in a minimum of {{ totalWeek }} weeks</h3>
+    </div>
+    {% for list in TodoList %}
+        {% for week, planRows in list.plan %}
+            <h4>{{ list.developer.username }} - {{ week }}. Week</h4>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Job Name</th>
+                    <th width="50px">Level</th>
+                    <th width="250px" class="text-center">Estimated Duration</th>
+                    <th width="150px" class="text-center">Operation Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for plan in planRows %}
+                    <tr>
+                        <td>{{ plan.title }}</td>
+                        <td class="text-center">{{ plan.level }}x</td>
+                        <td class="text-center">{{ plan.estimated_duration }}</td>
+                        <td class="text-center">{{ plan.effort }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    {% endfor %}
+
+    {% endblock %}
